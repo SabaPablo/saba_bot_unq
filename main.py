@@ -11,6 +11,8 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 print("Starting bot...")
 
+
+
 client = commands.Bot(command_prefix = '.')
 
 #We delete default help command
