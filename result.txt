@@ -1,0 +1,170 @@
+0 // Las aventuras de Godor
+1 // Ejercicio 1:
+2 function puedeGanarBatallaElfosAOrcos() {
+3     /*
+4         Propósito: Indica si la fuerza total de los elfos es mayor a la fuerza total 
+5         de los orcos ganar la batalla
+6         Parámetros:
+7             - No tiene 
+8         Precondicione:
+9             - Tiene que ser un escenario válido, la tierra de Gobsdor
+10         Tipo:
+11             - Es de tipo Booleano. Indica si la fuerza total de los elfos es mayor a 
+12             fuerza total de los orcos para ganar la batalla
+13     */
+14     return (laFuerzaTotalDe_(razaElfo()) > 
+15             laFuerzaTotalDe_(razaOrco()))
+16 }
+17 
+18 // subtareas:
+19 
+20 function laFuerzaTotalDe_(raza) {
+21     /*
+22         Propósito: Describe la fuerza total de toda la raza *raza* en Gobsdor 
+23         Parámetros: 
+24             - *raza*: Es de tipo Número. Indica el poder del personaje en el territorio
+25             actual
+26             - No tiene 
+27         Tipo:
+28             - Es de tipo Número. Describe la fuerza total de los elfos
+29     */
+30     IrAlInicioDelRecorrido__(Este, Norte)
+31     cantidadDePoderDeLosElfosVistos := 0
+32     while (not estoyEnElFinalDeUnRecorrido__(Este, Norte)) {
+33         cantidadDePoderDeLosElfosVistos :=
+34           cantidadDePoderDeLosElfosVistos + sumarPoderDe_Actual(raza)
+35           PasarASiguienteCelda__(Este, Norte)
+36     }
+37     return (cantidadDePoderDeLosElfosVistos + sumarPoderDeElfoActual())
+38 }
+39 
+40 function sumarPoderDe_Actual(raza) {
+41     /*
+42         Propósito: Describe el poder del personaje de la raza *raza* actual 
+43         Parámetros:
+44             *raza*: Es de tipo Número. Indica el poder del personaje en el territorio
+45             actual
+46         Precondiciones:
+47             - No tiene 
+48         Tipo:
+49             - Es de tipo Número. Describe el poder del personaje en el territorio actual
+50     */
+51     return (choose fuerzaDelPersonaje() when (hayRazaDelPersonaje_(raza))  
+52                    0 otherwise)
+53 }
+54 
+55 // hay que hacer lo mismo con la del orco
+56 // segunda forma: 
+57 
+58 function laFuerzaTotalDe_2(raza) {
+59     /**/
+60     IrAlInicioDelRecorrido__(Este, Norte) 
+61     cantidadDePoderDelElfoHastaAhora := 0
+62     cantidadDePoderDeOrcoHastaAhora := 0
+63     while (not estoyEnElFinalDeUnRecorrido__(Este, Norte)) {
+64         cantidadDePoderDelElfoHastaAhora := 
+65           cantidadDePoderDelElfoTotal + devuelveElPoderDelElfoActual()
+66           cantidadDePoderDeOrcoHastaAhora := 
+67             cantidadDePoderDeOrcoTotal + devuelveElPoderDelElfoActual()
+68             PasarASiguienteCelda__(Este, Norte)
+69     }
+70     return (cantidadDePoderDelElfoTotal + devuelveElPoderDelElfoActual() > 
+71             cantidadDePoderDeOrcoTotal + devuelveElPoderDelElfoActual())
+72 }
+73 
+74 function devuelveElPoderDelElfoActual() {
+75     return (choose fuerzaDelPersonaje() when (hayRazaDelPersonaje_(raza))  
+76                    0 otherwise) 
+77 }
+78 
+79 // punto 2)
+80 
+81 function algo( asdf){
+82 }
+83 
+84 function diasHastaLlegarHastaElMonteDelDestino_(dirección()) {
+85     /*
+86         Propósito: Describe la cantidad de dias que va a tardar grodo en atravesar 
+87         todos los territorios en Dirección *dirección* entre el monte del destino
+88         y el territorio actual 
+89         Parámetros:
+90             - dirección: Es de tipo dirección. Indica la direccion en linea recta hacia 
+91             donde está el monte del destino 
+92         Precondiciones:
+93             - El cabezal debe estar sobre grodo
+94             - Tiene que existir el monte del destino 
+95         Tipo:
+96             - Es de tipo Número. Describe la cantidad de días que va a tardar grodo 
+97             en atravesar todos los territorios 
+98     */
+99     cantidadDeDiasQueVaATardar := 0 
+100     while (not hayMonteDelDestino()) {
+101         cantidadDeDiasQueVaATardar := cantidadDeDiasQueVaATardar +
+102             elegirElDíaSegúnTerritorio()
+103             Mover(direccion)
+104 }   
+105 
+106 
+107 function losElDíaSegúnTerritorio() {
+108     return (choose 2 when (esTerrenoPlanicie() == formaDelTerreno())
+109                    4 when (esTerrenoBosque()   == formaDelTerreno())
+110                    5 when (esTerrenoAgua()     == formaDelTerreno()) 
+111                    boom otherwise)
+112 }
+113 
+114 // ejercicio 3:
+115 
+116 procedure matarATodosLosOrcosYTrollsPorDestrucciónDeLaBolita() {
+117     /*
+118         Propósito: Matar a todos los enemigos de Gobsdor
+119         Parámetros:
+120             - No tiene 
+121         Precondiciones:
+122             - Debe haber al menos un enemigo en el territorio actual 
+123             - La Bolita debe haber sido destruida previamente 
+124     */
+125     IrAlInicioDelRecorrido__(Este, Norte)
+126     while (not estoyEnElFinalDeUnRecorrido__(Este, Norte)) {
+127         eliminarEnemigoActual() 
+128         PasarASiguienteCelda__(Este, Norte)
+129     }
+130     eliminarEnemigoActual()
+131 }
+132 
+133 // ejercicio 4:
+134 
+135 function estaGrodoAUnTerritorioDelMonteDestinoCercaDeDestruirLaBolita(algo) {
+136     /*
+137         Propósito: Indica si Grodo está a un territorio del monte del destino 
+138         hacia alguna de las 4 Direcciones 
+139         Parámetros:
+140             - No tiene 
+141         Precondiciones:
+142             - El cabezal debe estar sobre Grodo si no pones esto lo tenes que buscar a grodo 
+143         Tipo:
+144             - Es de tipo Booleano. Indica si Grodo está a un territorio del 
+145             monte del Destino hacia alguna de las 4 Direcciones 
+146     */
+147      return (estáLaBolita() && estaElMonteDelDestinoCerca())
+148 
+149 }
+
+ 
+
+[error line: 40] - El nombre de la funcion "sumarPoderDe_Actual(raza)" no debe tener como primer palabra un verbo
+[error line: 81] - El numero de "_" en el nombre del procedimiento "algo(" debe ser el mismo al numero de parametros
+[error line: 81] - Mal nombre de function, que comunica la palabra "algo"?
+[error line: 84] - Hay parentesis que no corresponden
+[error line: 116] - El nombre del procedimiento "matarATodosLosOrcosYTrollsPorDestrucciónDeLaBolita()" debe comienza con Mayuscula
+[error line: 135] - El numero de "_" en el nombre del procedimiento "estaGrodoAUnTerritorioDelMonteDestinoCercaDeDestruirLaBolita(algo)" debe ser el mismo al numero de parametros
+[error] - Hay 10 llaves que abren, pero 9 llaves que cierran
+[error line: 3] - El procedimiento o funcion no tiene precondiciones o esta mal escrito
+[error line: 21] - El procedimiento o funcion no tiene precondiciones o esta mal escrito
+[error line: 59] - El procedimiento o funcion no tiene propósito o esta mal escrito
+[error line: 59] - El procedimiento o funcion no tiene precondiciones o esta mal escrito
+[error line: 75] - El procedimiento o funcion no tiene propósito o esta mal escrito
+[error line: 75] - El procedimiento o funcion no tiene precondiciones o esta mal escrito
+[error line: 82] - El procedimiento o funcion no tiene propósito o esta mal escrito
+[error line: 82] - El procedimiento o funcion no tiene precondiciones o esta mal escrito
+[error line: 108] - El procedimiento o funcion no tiene propósito o esta mal escrito
+[error line: 108] - El procedimiento o funcion no tiene precondiciones o esta mal escrito
