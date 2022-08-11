@@ -32,7 +32,7 @@ async def help(ctx):
         colour = discord.Colour.green())
     embed.set_author(name='Help : list of commands available')
     embed.add_field(name='.ping', value='Returns bot respond time in milliseconds', inline=False)
-    embed.add_field(name='.hello', value='??', inline=False)
+    embed.add_field(name='.hi', value='??', inline=False)
     embed.add_field(name='.fix', value='Send corrections data', inline=False)
     await ctx.send(embed=embed)
 
@@ -60,7 +60,7 @@ async def fix(ctx):
 
         #Answers with a random quote
 @client.command()
-async def quote(ctx):
+async def hi(ctx):
     responses = open('quotes.txt').read().splitlines()
     random.seed(a=None)
     response = random.choice(responses)
